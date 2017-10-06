@@ -1,0 +1,12 @@
+body{
+    text-align: center;
+    background: #4f2434;
+    color: white;
+    font-family: Georgia;
+}
+div#game {
+    background-color: #683c4c;
+}
+h1{
+    font: italic bold 40px Arial;
+}
