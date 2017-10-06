@@ -4,8 +4,16 @@
   <title>Byte Hack 2017</title>
 </head>
 <body>
-  <p>Ayyyyyy</p>
+  <h1>Ayyyyyy</h1>
   <p>This is our thing. thanks for visiting</p>
+  <script src="bonsai-0.4.1.min.js"></script>
+  <div id="game"></div>
+  <script>
+      bonsai.run(document.getElementById('game'), 'game.js', {
+          width: 500,
+          height: 400
+      });
+  </script>
   <p>do you want to build a snowman?</p>
 </body>
 </html>
