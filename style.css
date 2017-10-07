@@ -4,7 +4,7 @@ body{
     color: white;
     font-family: Georgia;
 }
-div#game {
+canvas {
     background-color: #683c4c;
 }
 h1{

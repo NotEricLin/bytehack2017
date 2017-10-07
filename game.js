@@ -1,9 +1,5 @@
-var square = new Rect(0, 0, 100, 100);
+var renderer = PIXI.autoDetectRenderer(256, 256);
 
-square.addTo(stage);
-square.fill('red');
-square.animate('1.5s', {
-    rotation: Math.PI,
-    x: 700,
-    fillColor: 'green'
-});
+document.body.appendChild(renderer.view);
+var stage = new PIXI.Container();
+renderer.render(stage);
