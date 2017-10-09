@@ -11,17 +11,26 @@ PIXI.loader
   .add("media/ldr_bg1.png")
   .load(setup);
 
+//Declare sprite variables
+var bg;
+
 //This function runs when all the images have been loaded
 function setup() {
   //Create background sprite
-  var bg = new PIXI.Sprite(
-    PIXI.loader.resources["media/ldr_bg1.png"].texture
-  );
+  bg = new PIXI.extras.TilingSprite(
+    PIXI.loader.resources["media/ldr_bg1.png"].texture,
+    640, 480);
+  bg.tilePosition.x = 0;
+  bg.tilePosition.y = 0;
 
   //Add the sprite to the stage
   stage.addChild(bg);
-  bg.visible = true;
 
-  //Render the game!
-  renderer.render(stage);
+  //Makes a render loop - call update() 60 times a second
+  requestAnimationFrame(update);
 }
+ function update() {
+   bg.tilePosition.x -= 0.64;
+   renderer.render(stage);
+   requestAnimationFrame(update);
+ }
