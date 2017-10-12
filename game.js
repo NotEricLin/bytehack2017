@@ -14,21 +14,21 @@ PIXI.loader
   .load(setup);
 
 //Declare sprite variables
-var sprites = {};
+var bg, lion;
 
 //This function runs when all the images have been loaded
 function setup() {
   //Create background sprite
-  sprites.bg = new PIXI.extras.TilingSprite(
+  bg = new PIXI.extras.TilingSprite(
     rsc["bg1"].texture,
     640, 480);
-  sprites.bg.tilePosition.x = 0;
-  sprites.bg.tilePosition.y = 0;
+  bg.tilePosition.x = 0;
+  bg.tilePosition.y = 0;
 
   //This contains all the lion dancer sprites
-  sprites.lion = new PIXI.Sprite(rsc["lion1"].texture);
-  sprites.lion.position.x = 20
-  sprites.lion.position.y = 50
+  lion = new PIXI.Sprite(rsc["lion1"].texture);
+  lion.position.x = 20
+  lion.position.y = 50
 
   //Add the sprite to the stage
   app.addChild(sprites.bg, sprites.lion);
@@ -38,9 +38,9 @@ function setup() {
 }
  function update() {
   //Move the background
-   sprites.bg.tilePosition.x -= 0.64;
+   bg.tilePosition.x -= 0.64;
 
    //Render game for this frame
-   app.render(stage);
+   app.render();
    requestAnimationFrame(update);
  }
