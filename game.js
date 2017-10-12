@@ -31,7 +31,7 @@ function setup() {
   sprites.lion.position.y = 50
 
   //Add the sprite to the stage
-  app.addChild([sprites.bg, sprites.lion]);
+  app.addChild(sprites.bg, sprites.lion);
 
   //Makes a render loop - call update() 60 times a second
   requestAnimationFrame(update);
