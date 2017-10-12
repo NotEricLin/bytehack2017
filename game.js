@@ -2,13 +2,13 @@
 var app = new PIXI.Application({width: 640, height: 480});
 
 //Alias for loader resources
-var rsc = PIXI.loader.resources;
+var rsc = app.loader.resources;
 
 //Adds renderer to the website
 document.body.appendChild(app.view);
 
 //Load all the images needed for the game
-PIXI.loader
+app.loader
   .add('bg1', "media/ldr_bg1.png")
   .add('lion1', "media/ldr_lion1.png")
   .load(setup);
@@ -31,7 +31,8 @@ function setup() {
   lion.position.y = 50
 
   //Add the sprite to the stage
-  app.addChild(bg, lion);
+  app.stage.addChild(bg)
+    .addChild(lion);
 
   //Makes a render loop - call update() 60 times a second
   requestAnimationFrame(update);
@@ -41,6 +42,6 @@ function setup() {
    bg.tilePosition.x -= 0.64;
 
    //Render game for this frame
-   app.render();
+   app.renderer.render();
    requestAnimationFrame(update);
  }
