@@ -1,27 +1,34 @@
 //Initialize PIXI by creating a renderer and stage
-var renderer = PIXI.autoDetectRenderer(640, 480);
-var stage = new PIXI.Container();
+var app = new PIXI.Application({width: 640, height: 480});
+
+//Alias for loader resources
+var rsc = PIXI.loader.resources;
 
 //Adds renderer to the website
-document.body.appendChild(renderer.view);
-
+document.body.appendChild(app.view);
 
 //Load all the images needed for the game
 PIXI.loader
-  .add("media/ldr_bg1.png")
+  .add('bg1', "media/ldr_bg1.png")
+  .add('lion1', "media/ldr_lion1.png")
   .load(setup);
 
 //Declare sprite variables
-var bg;
+var sprites = {};
 
 //This function runs when all the images have been loaded
 function setup() {
   //Create background sprite
-  bg = new PIXI.extras.TilingSprite(
-    PIXI.loader.resources["media/ldr_bg1.png"].texture,
+  sprites.bg = new PIXI.extras.TilingSprite(
+    rsc["bg1"].texture,
     640, 480);
   bg.tilePosition.x = 0;
   bg.tilePosition.y = 0;
+
+  //This contains all the lion dancer sprites
+  sprites.lion = new PIXI.Sprite(rsc["lion1"].texture);
+  lion.position.x = 20
+  lion.position.y = 50
 
   //Add the sprite to the stage
   stage.addChild(bg);
@@ -30,7 +37,10 @@ function setup() {
   requestAnimationFrame(update);
 }
  function update() {
+  //Move the background
    bg.tilePosition.x -= 0.64;
+
+   //Render game for this frame
    renderer.render(stage);
    requestAnimationFrame(update);
  }
