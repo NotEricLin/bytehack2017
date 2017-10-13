@@ -89,6 +89,11 @@ function setup() {
   app.stage.addChild(sprites.bg)
     .addChild(sprites.lion);
 
+  //Create key listeners
+  keys.up = keyboard(87);
+  keys.left = keyboard(65);
+  keys.down = keyboard(83);
+  keys.right = keyboard(68);
 
   //Starts running the game!
   app.ticker.add(update);
@@ -124,4 +129,43 @@ function play(){
   } else if (sprites.bg.vx > 1.28) {
     sprites.bg.vx = 1.28;
   }
+}
+
+
+//Function to handle keyboard events
+function keyboard(keyCode) {
+  var key = {};
+  key.code = keyCode;
+  key.isDown = false;
+  key.isUp = true;
+  key.press = undefined;
+  key.release = undefined;
+  //The `downHandler`
+  key.downHandler = function(event) {
+    if (event.keyCode === key.code) {
+      if (key.isUp && key.press) key.press();
+      key.isDown = true;
+      key.isUp = false;
+    }
+    event.preventDefault();
+  };
+
+  //The `upHandler`
+  key.upHandler = function(event) {
+    if (event.keyCode === key.code) {
+      if (key.isDown && key.release) key.release();
+      key.isDown = false;
+      key.isUp = true;
+    }
+    event.preventDefault();
+  };
+
+  //Attach event listeners
+  window.addEventListener(
+    "keydown", key.downHandler.bind(key), false
+  );
+  window.addEventListener(
+    "keyup", key.upHandler.bind(key), false
+  );
+  return key;
 }
