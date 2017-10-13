@@ -28,7 +28,7 @@ function setup() {
   //This contains all the lion dancer sprites
   lion = new PIXI.Sprite(rsc["lion1"].texture);
   lion.position.x = 20
-  lion.position.y = 50
+  lion.position.y = 290
 
   //Add the sprite to the stage
   app.stage.addChild(bg)
@@ -42,6 +42,6 @@ function setup() {
    bg.tilePosition.x -= 0.64;
 
    //Render game for this frame
-   app.renderer.render();
+   app.renderer.render(app.stage);
    requestAnimationFrame(update);
  }
