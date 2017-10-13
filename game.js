@@ -94,6 +94,7 @@ function setup() {
   keys.left = keyboard(65);
   keys.down = keyboard(83);
   keys.right = keyboard(68);
+  keys.space = keyboard(32);
 
   //Starts running the game!
   app.ticker.add(update);
@@ -114,12 +115,25 @@ function update() {
   app.render();
 }
 
+
+var count = 0; //variable for loop within menu function for text
+//Text that will gently flash on screen
+var text = new PIXI.Text("Press spacebar to start",
+{align : 'center', stroke : '#FFFFFF', fontSize : 18, fontWeight: 'bold'});
+text.anchor = {x: 0.5, y: 1};
+text.position = {x: 320, y: 440};
+
 //Runs when user is on menu screen
 function menu(){
   //Move the background
   sprites.bg.tilePosition.x -= sprites.bg.vx;
 
-  //TODO implement code to show a play button and a logo, maybe?
+  app.stage.addChild(text);
+  //Makes the text flash over time
+  if (count < 120) { count++; }
+  else { count = 0; }
+  if (count < 61) { text.alpha = count / 60.0; }
+  else { text.alpha = (60 - (count - 60)) / 60.0; }
 }
 
 //Runs when user is playing the game
