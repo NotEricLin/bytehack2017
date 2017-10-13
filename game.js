@@ -119,7 +119,7 @@ function update() {
 var count = 0; //variable for loop within menu function for text
 //Text that will gently flash on screen
 var text = new PIXI.Text("Press spacebar to start",
-{align : 'center', stroke : '#FFFFFF', fontSize : 18, fontWeight: 'bold'});
+{align : 'center', fill : '#FFFFFF', fontSize : 18, fontWeight: 'bold'});
 text.anchor = {x: 0.5, y: 1};
 text.position = {x: 320, y: 440};
 
@@ -134,15 +134,25 @@ function menu(){
   else { count = 0; }
   if (count < 61) { text.alpha = count / 60.0; }
   else { text.alpha = (60 - (count - 60)) / 60.0; }
+
+  if (keys.space.isDown == true) {
+    app.ticker.addOnce(function(){ text.visible = false; });
+    gameState = play;
+  }
 }
+
 
 //Runs when user is playing the game
 function play(){
-  if (sprites.bg.vx < 1.28) {
+  //This code makes the background speed gently speed up
+  if (sprites.bg.vx < 1.7) {
     sprites.bg.vx = sprites.bg.vx*1.2;
-  } else if (sprites.bg.vx > 1.28) {
-    sprites.bg.vx = 1.28;
+  } else if (sprites.bg.vx > 1.7) {
+    sprites.bg.vx = 1.7;
   }
+
+  //Move the background
+  sprites.bg.tilePosition.x -= sprites.bg.vx;
 }
 
 
