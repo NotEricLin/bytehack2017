@@ -52,7 +52,7 @@
 //Initialize PIXI by creating a renderer and stage
 var app = new PIXI.Application({width: 640, height: 480});
 
-//Alias for loader resources
+//Alias for loader resources (basically a shortcut)
 var loader = app.loader;
 
 //Adds renderer to the website
@@ -145,10 +145,21 @@ function menu(){
 //Runs when user is playing the game
 function play(){
   //This code makes the background speed gently speed up
-  if (sprites.bg.vx < 1.7) {
-    sprites.bg.vx = sprites.bg.vx*1.2;
-  } else if (sprites.bg.vx > 1.7) {
-    sprites.bg.vx = 1.7;
+  if (sprites.bg.vx < 2) {
+    sprites.bg.vx = sprites.bg.vx*1.1;
+  } else if (sprites.bg.vx > 2) {
+    sprites.bg.vx = 2;
+  }
+
+  //Lion speed
+  sprites.lion.vx = 5;
+
+  //Move sprite with keyboard
+  if (keys.right.isDown) {
+    sprites.lion.position.x += sprites.lion.vx;
+  }
+  if (keys.left.isDown) {
+    sprites.lion.position.x -= sprites.lion.vx;
   }
 
   //Move the background
