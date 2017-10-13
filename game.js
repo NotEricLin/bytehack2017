@@ -151,6 +151,9 @@ function play(){
     sprites.bg.vx = 2;
   }
 
+  //Make lion stand inside of the benches
+  sprites.lion.y -= 82;
+
   //Lion speed
   sprites.lion.vx = 5;
 
