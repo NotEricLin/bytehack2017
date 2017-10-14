@@ -71,6 +71,13 @@ const sprites = {};
 //Variable for key listeners
 const keys = {};
 
+window.addEventListener("keydown", event => {
+  keys[event.keyCode] = true;
+});
+
+window.addEventListener("keyup", event => {
+  keys[event.keyCode] = false;
+});
 
 //This function runs when all the images have been loaded
 function setup() {
@@ -98,7 +105,7 @@ function setup() {
 
 
 //Current game state: play, menu, dead, etc.
-var gameState = menu;
+var gameState = play;
 
 //This is where all the animation is handled centrally!
 function update() {
@@ -111,17 +118,27 @@ function update() {
 
 //Runs when user is on menu screen
 function menu(){
-  //Move the background
-  sprites.bg.tilePosition.x -= sprites.bg.vx;
-
   //TODO implement code to show a play button and a logo, maybe?
 }
 
 //Runs when user is playing the game
 function play(){
-  if (sprites.bg.vx < 1.28) {
-    sprites.bg.vx = sprites.bg.vx*1.2;
-  } else if (sprites.bg.vx > 1.28) {
-    sprites.bg.vx = 1.28;
+  const maxVelocity = 3.28;
+  const acc = 0.2;
+  const spriteDirection = sprites.bg.vx / Math.abs(sprites.bg.vx || 1);
+
+  if (keys[39]) {
+    // accelerate right
+    sprites.bg.vx = Math.min(sprites.bg.vx + acc, maxVelocity);
+  } else if (keys[37]) {
+    // accelerate left
+    sprites.bg.vx = Math.max(sprites.bg.vx - acc, -maxVelocity);
+  } else {
+    // decelerate
+    sprites.bg.vx = spriteDirection *
+      Math.max(Math.abs(sprites.bg.vx) - acc, 0);
   }
+
+  //Move the background
+  sprites.bg.tilePosition.x -= sprites.bg.vx;
 }
