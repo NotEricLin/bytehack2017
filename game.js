@@ -48,6 +48,7 @@
     https://pixijs.github.io/examples/
 */
 
+PIXI.utils.skipHello();
 
 //Initialize PIXI by creating a renderer and stage
 var app = new PIXI.Application({width: 640, height: 480});
@@ -61,6 +62,8 @@ document.body.appendChild(app.view);
 //Load all the images needed for the game
 loader
   .add('bg1', "media/ldr_bg1.png")
+  .add('fg1', "media/ldr_fg1.png")
+  .add('clouds', "media/clouds.png")
   .add('lion1', "media/ldr_lion1.png")
   .load(setup);
 
@@ -85,7 +88,14 @@ function setup() {
   sprites.bg = new PIXI.extras.TilingSprite(
     loader.resources["bg1"].texture,
     640, 480);
-  sprites.bg.vx = 0.64;
+  sprites.bg.vx = 0;
+  sprites.fg = new PIXI.extras.TilingSprite(
+    loader.resources["fg1"].texture,
+    640, 140);
+  sprites.fg.position.y = 340;
+  sprites.clouds = new PIXI.extras.TilingSprite(
+    loader.resources["clouds"].texture,
+    640, 45);
 
   //This contains all the lion dancer sprites
   sprites.lion = new PIXI.Sprite(loader.resources["lion1"].texture);
@@ -94,8 +104,9 @@ function setup() {
 
   //Add the sprite to the stage
   app.stage.addChild(sprites.bg)
-    .addChild(sprites.lion);
-
+  app.stage.addChild(sprites.clouds)
+  app.stage.addChild(sprites.fg)
+  app.stage.addChild(sprites.lion);
 
   //Starts running the game!
   app.ticker.add(update);
@@ -139,6 +150,11 @@ function play(){
       Math.max(Math.abs(sprites.bg.vx) - acc, 0);
   }
 
-  //Move the background
+  // Move the background
   sprites.bg.tilePosition.x -= sprites.bg.vx;
+
+  // Move the foreground
+  sprites.fg.tilePosition.x -= sprites.bg.vx * 2;
+  // Move the clouds
+  sprites.clouds.tilePosition.x -= sprites.bg.vx / 6;
 }
