@@ -165,6 +165,12 @@ function play(){
   if (keys.left.isDown) {
     sprites.lion.position.x -= sprites.lion.vx;
   }
+  if (keys.up.isDown) {
+    sprites.lion.position.y = 90;
+  }
+  if (keys.down.isDown) {
+    sprites.lion.position.y = 190;
+  }
 
   //Move the background
   sprites.bg.tilePosition.x -= sprites.bg.vx;
