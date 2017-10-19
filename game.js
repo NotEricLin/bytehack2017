@@ -139,7 +139,7 @@ function menu(){
     app.ticker.addOnce(function(){
       text.visible = false;
       //Make lion stand inside of the benches
-      sprites.lion.y -= 82;
+      sprites.lion.y -= 100;
     });
     gameState = play;
   }
