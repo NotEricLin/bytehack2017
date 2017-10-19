@@ -136,7 +136,11 @@ function menu(){
   else { text.alpha = (60 - (count - 60)) / 60.0; }
 
   if (keys.space.isDown == true) {
-    app.ticker.addOnce(function(){ text.visible = false; });
+    app.ticker.addOnce(function(){
+      text.visible = false;
+      //Make lion stand inside of the benches
+      sprites.lion.y -= 82;
+    });
     gameState = play;
   }
 }
@@ -150,9 +154,6 @@ function play(){
   } else if (sprites.bg.vx > 2) {
     sprites.bg.vx = 2;
   }
-
-  //Make lion stand inside of the benches
-  sprites.lion.y -= 82;
 
   //Lion speed
   sprites.lion.vx = 5;
