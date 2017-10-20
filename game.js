@@ -159,10 +159,10 @@ function play(){
   sprites.lion.vx = 5;
 
   //Move sprite with keyboard
-  if (keys.right.isDown) {
+  if (keys.right.isDown && sprites.lion.x < 540) {
     sprites.lion.position.x += sprites.lion.vx;
   }
-  if (keys.left.isDown) {
+  if (keys.left.isDown && sprites.lion.x > 0) {
     sprites.lion.position.x -= sprites.lion.vx;
   }
   if (keys.up.isDown) {
