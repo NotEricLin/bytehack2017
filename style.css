@@ -1,12 +1,30 @@
 body{
-    text-align: center;
-    background: #e2c5d0;
-    color: white;
-    font-family: Georgia;
+  text-align: center;
+  background: #31373f;
+  color: white;
+  font-family: Georgia;
 }
 canvas {
-    background-color: #683c4c;
+  background-color: #683c4c;
 }
 h1{
-    font: italic bold 40px Arial;
+  font: italic bold 40px Arial;
+}
+h2{
+  font: bold 18px Georgia;
+  color: #abacad;
+  margin-left: 100px;
+  margin-right: 100px;
+  margin-bottom: 30px;
+}
+#desc{
+  margin: 200px;
+  font: italic 14px Georgia;
+  color: #dce2e5;
+  margin-top: 40px;
+  margin-bottom: 50px;
+}
+a{
+  font: italic 20px Georgia;
+  color: #eef4e1;
 }
