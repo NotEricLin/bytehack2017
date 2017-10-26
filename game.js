@@ -145,6 +145,9 @@ function menu(){
   }
 }
 
+//Variable for frame that is currently jumping at
+var currentJumpFrame;
+var isJumping = false;
 
 //Runs when user is playing the game
 function play(){
@@ -166,11 +169,15 @@ function play(){
     sprites.lion.position.x -= sprites.lion.vx;
   }
   if (keys.up.isDown) {
-    sprites.lion.position.y = 90;
+    //TODO make it jump smoothly
+    isJumping = true;
   }
   if (keys.down.isDown) {
     sprites.lion.position.y = 190;
   }
+
+  //Set y according to currentJumpFrame
+  
 
   //Move the background
   sprites.bg.tilePosition.x -= sprites.bg.vx;
