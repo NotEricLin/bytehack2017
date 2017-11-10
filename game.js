@@ -101,8 +101,8 @@ var isJumping = false;
 
 //Jump parabola variables
 var jump = {};
-jump.a = 480/68;
-jump.b = 195060/17;
+jump.a = 19/60;
+jump.b = -77/6;
 jump.c = 190;
 jump.frame = -1;
 
@@ -127,16 +127,20 @@ function play(){
   }
   if (keys.up.isDown) {
     //TODO make it jump smoothly
-    if (jump.frame = -1 && sprites.lion.y = 190) jump.frame = 0;
+    if (jump.frame == -1) jump.frame = 0;
   }
   if (keys.down.isDown) {
-    jump.frame = -1;
+    if(jump.frame == 30) jump.frame = -16;
   }
 
   //Set y according to currentJumpFrame
-  if(jump.frame != -1 && jump.frame != 60){
-    lion.position.y = (Math.pow(jump.frame, 2)*jump.a + jump.frame*jump.b + jump.c);
+  if (jump.frame > -1 && jump.frame != 30){
+    sprites.lion.position.y = (Math.pow(jump.frame, 2)*jump.a + jump.frame*jump.b + jump.c);
     jump.frame++;
+  }
+  if (jump.frame < -1 && jump.frame != -1) {
+    sprites.lion.position.y = (590/3) + 20/3*jump.frame;
+    jump.frame++
   }
 
   //Move the background
