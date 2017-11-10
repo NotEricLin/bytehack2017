@@ -154,7 +154,7 @@ var jump = {};
 jump.a = 480/68;
 jump.b = 195060/17;
 jump.c = 190;
-jump.frame = 60;
+jump.frame = -1;
 
 //Runs when user is playing the game
 function play(){
