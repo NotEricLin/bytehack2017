@@ -1,4 +1,3 @@
-
 //Initialize PIXI by creating a renderer and stage
 var app = new PIXI.Application({width: 640, height: 480});
 
@@ -10,13 +9,9 @@ document.body.appendChild(app.view);
 
 //Load all the images needed for the game
 loader
-  .add('bg1', "media/ldr_bg1.png")
-  .add('lion1', "media/ldr_lion1.png")
+  .add('bg1', "game/media/ldr_bg1.png")
+  .add('lion1', "game/media/ldr_lion1.png")
   .load(setup);
-
-
-//Declare sprite variables
-const sprites = {};
 
 //Variable for key listeners
 const keys = {};
@@ -25,19 +20,17 @@ const keys = {};
 //This function runs when all the images have been loaded
 function setup() {
   //Create background sprite
-  sprites.bg = new PIXI.extras.TilingSprite(
+  bg = new PIXI.extras.TilingSprite(
     loader.resources["bg1"].texture,
     640, 480);
-  sprites.bg.vx = 0.64;
+  bg.vx = 0.64;
 
-  //This contains all the lion dancer sprites
-  sprites.lion = new PIXI.Sprite(loader.resources["lion1"].texture);
-  sprites.lion.position.x = 20
-  sprites.lion.position.y = 290
+  //Sprites for objects
+  lion.setup();
 
   //Add the sprite to the stage
-  app.stage.addChild(sprites.bg)
-    .addChild(sprites.lion);
+  app.stage.addChild(bg)
+    .addChild(lion.sprite);
 
   //Create key listeners
   keys.up = keyboard(87);
@@ -66,7 +59,7 @@ function update() {
 }
 
 
-var count = 0; //variable for loop within menu function for text
+count = 0; //variable for loop within menu function for text
 //Text that will gently flash on screen
 var text = new PIXI.Text("Press spacebar to start",
 {align : 'center', fill : '#FFFFFF', fontSize : 18, fontWeight: 'bold'});
@@ -76,7 +69,7 @@ text.position = {x: 320, y: 440};
 //Runs when user is on menu screen
 function menu(){
   //Move the background
-  sprites.bg.tilePosition.x -= sprites.bg.vx;
+  bg.tilePosition.x -= bg.vx;
 
   app.stage.addChild(text);
   //Makes the text flash over time
@@ -86,62 +79,30 @@ function menu(){
   else { text.alpha = (60 - (count - 60)) / 60.0; }
 
   if (keys.space.isDown == true) {
-    app.ticker.addOnce(function(){
-      text.visible = false;
-      //Make lion stand inside of the benches
-      sprites.lion.y -= 100;
-    });
+    text.visible = false;
+    //Make lion stand inside of the benches
+    lion.sprite.y -= 100;
     gameState = play;
   }
 }
 
-//Jump parabola variables
-var jump = {};
-jump.a = 19/60;
-jump.b = -77/6;
-jump.c = 190;
-jump.frame = -1;
 
 //Runs when user is playing the game
 function play(){
   //This code makes the background speed gently speed up
-  if (sprites.bg.vx < 2) {
-    sprites.bg.vx = sprites.bg.vx*1.1;
-  } else if (sprites.bg.vx > 2) {
-    sprites.bg.vx = 2;
+  if (bg.vx < 2) {
+    bg.vx = bg.vx*1.1;
+  } else if (bg.vx > 2) {
+    bg.vx = 2;
   }
 
-  //Lion speed
-  sprites.lion.vx = 5;
-
-  //Move sprite with keyboard
-  if (keys.right.isDown && sprites.lion.x < 540) {
-    sprites.lion.position.x += sprites.lion.vx;
-  }
-  if (keys.left.isDown && sprites.lion.x > 0) {
-    sprites.lion.position.x -= sprites.lion.vx;
-  }
-  if (keys.up.isDown) {
-    //TODO make it jump smoothly
-    if (jump.frame == -1) jump.frame = 0;
-  }
-  if (keys.down.isDown) {
-    if(jump.frame == 30) jump.frame = -11;
-  }
-
-  //Set y according to currentJumpFrame
-  if (jump.frame > -1 && jump.frame != 30){
-    sprites.lion.position.y = (Math.pow(jump.frame, 2)*jump.a + jump.frame*jump.b + jump.c);
-    jump.frame++;
-  }
-  if (jump.frame < -1 && jump.frame != -1) {
-    sprites.lion.position.y = 620/3 + 50/3*jump.frame;
-    jump.frame++
-  }
+  //Do play functions of the objects
+  lion.play();
 
   //Move the background
-  sprites.bg.tilePosition.x -= sprites.bg.vx;
+  bg.tilePosition.x -= bg.vx;
 }
+
 
 
 //Function to handle keyboard events
