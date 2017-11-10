@@ -149,6 +149,13 @@ function menu(){
 var currentJumpFrame;
 var isJumping = false;
 
+//Jump parabola variables
+var jump = {};
+jump.a = 480/68;
+jump.b = 195060/17;
+jump.c = 190;
+jump.frame = 60;
+
 //Runs when user is playing the game
 function play(){
   //This code makes the background speed gently speed up
@@ -170,14 +177,17 @@ function play(){
   }
   if (keys.up.isDown) {
     //TODO make it jump smoothly
-    isJumping = true;
+    if (jump.frame = -1 && sprites.lion.y = 190) jump.frame = 0;
   }
   if (keys.down.isDown) {
-    sprites.lion.position.y = 190;
+    jump.frame = -1;
   }
 
   //Set y according to currentJumpFrame
-  
+  if(jump.frame != -1 && jump.frame != 60){
+    lion.position.y = (Math.pow(jump.frame, 2)*jump.a + jump.frame*jump.b + jump.c);
+    jump.frame++;
+  }
 
   //Move the background
   sprites.bg.tilePosition.x -= sprites.bg.vx;
