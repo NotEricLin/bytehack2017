@@ -95,10 +95,6 @@ function menu(){
   }
 }
 
-//Variable for frame that is currently jumping at
-var currentJumpFrame;
-var isJumping = false;
-
 //Jump parabola variables
 var jump = {};
 jump.a = 19/60;
@@ -130,7 +126,7 @@ function play(){
     if (jump.frame == -1) jump.frame = 0;
   }
   if (keys.down.isDown) {
-    if(jump.frame == 30) jump.frame = -16;
+    if(jump.frame == 30) jump.frame = -11;
   }
 
   //Set y according to currentJumpFrame
@@ -139,7 +135,7 @@ function play(){
     jump.frame++;
   }
   if (jump.frame < -1 && jump.frame != -1) {
-    sprites.lion.position.y = (590/3) + 20/3*jump.frame;
+    sprites.lion.position.y = 620/3 + 50/3*jump.frame;
     jump.frame++
   }
 
