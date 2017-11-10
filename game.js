@@ -185,7 +185,7 @@ function play(){
 
   //Set y according to currentJumpFrame
   if(jump.frame != -1 && jump.frame != 60){
-    lion.position.y = (Math.pow(jump.frame, 2)*jump.a + jump.frame*jump.b + jump.c);
+    sprites.lion.position.y = (Math.pow(jump.frame, 2)*jump.a + jump.frame*jump.b + jump.c);
     jump.frame++;
   }
 
