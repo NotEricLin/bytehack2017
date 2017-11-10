@@ -177,7 +177,7 @@ function play(){
   }
   if (keys.up.isDown) {
     //TODO make it jump smoothly
-    if (jump.frame = -1 && sprites.lion.y = 190) jump.frame = 0;
+    if (jump.frame == -1 && sprites.lion.y == 190) jump.frame = 0;
   }
   if (keys.down.isDown) {
     jump.frame = -1;
