@@ -28,6 +28,7 @@ lion.play = function(){
   if (keys.up.isDown) {
     //TODO make it jump smoothly
     if (jump.frame == -1) jump.frame = 0;
+    if (jump.frame == 30) jump.frame = 31;
   }
   if (keys.down.isDown) {
     if(jump.frame == 30) jump.frame = -10;
@@ -41,5 +42,10 @@ lion.play = function(){
   if (jump.frame < -1 && jump.frame != -1) {
     lion.sprite.position.y = 215 + 25/2*jump.frame;
     jump.frame++
+  }
+  if(jump.frame > 30){
+    var frame = jump.frame - 31;
+    lion.sprite.position.y = (Math.pow(frame, 2)*(3/32) + frame*-15/2 + 90);
+    if(lion.sprite.position.y <= 90) {jump.frame = 30; lion.sprite.y = 90;}
   }
 }
