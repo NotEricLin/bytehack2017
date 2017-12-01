@@ -46,6 +46,6 @@ lion.play = function(){
   if(jump.frame > 30){
     var frame = jump.frame - 31;
     lion.sprite.position.y = (Math.pow(frame, 2)*(3/32) + frame*-15/2 + 90);
-    if(lion.sprite.position.y <= 90) {jump.frame = 30; lion.sprite.y = 90;}
+    if(lion.sprite.position.y < 90) {jump.frame = 30; lion.sprite.y = 90;}
   }
 }
